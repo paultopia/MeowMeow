@@ -1,11 +1,9 @@
-(ns blabber.core)
+(ns blabber.core 
+  (:require 
+    [clojure.string :refer [lower-case split]]
+    [clojure.walk :refer [keywordize-keys]]
+    [clojure.core.matrix.dataset :refer [dataset]]))
 
-; first draft of term document matrix and preprocessing.
-; usage: take a vector of documents (corpus), call (make-TD-matrix corpus preprocessing-functions)
-; where preprocessing-functions are as many as you want, depunctuate is available, as is default-preprocess
-
-(require '[clojure.string :as str])
-(require '[clojure.walk :as walk])
 (defn depunctuate 
   "strip punctuation from string"
   [string] 
@@ -13,11 +11,11 @@
 (defn default-preprocess 
   "sensible default preprocessing" 
   [string]
-  (-> string depunctuate str/lower-case))
+  (-> string depunctuate lower-case))
 (defn whitespace-split 
   "split a vector of preprocessed strings into vector of vectors of strings on whitespace" 
   [preprocessed-docs] 
-  (map #(str/split % #"\s") preprocessed-docs))
+  (pmap #(split % #"\s") preprocessed-docs))
 (defn count-strings 
   "count frequencies of strings in vector of vectors of strings" 
   [stringvecs]
@@ -41,10 +39,18 @@
     (sparsify-counts 
       (-> stringvecs list-strings cartesian-map) 
       (-> stringvecs count-strings))))  
+
+(defn CMat-TDM 
+  "make a core.matrix dataset from vector of preprocessed docs"
+  [preprocessed-docs]
+  (dataset (unsorted-TD-map preprocessed-docs)))
+
+; I don't need any of the rest of the stuff below now, core.matrix just handles the business.
+
 (defn TD-map
   "make a sorted document-term-map of vector of preprocessed docs with keywords"
   [preprocessed-docs]
-  (walk/keywordize-keys  ; this is mainly for later flexibility
+  (keywordize-keys  ; this is mainly for later flexibility
     (map #(into (sorted-map) %) (unsorted-TD-map preprocessed-docs))))
 (defn TD-seqs
   "convert document-term-map into sequence of sequences"
