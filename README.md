@@ -26,6 +26,8 @@ FIXME
 
 [ ] Sparse terms removal.
 
+[ ] Removal of short words by user-provided length. (Also, I suspect the current implementation with mapping over strings as characters will puke on any one-character documents.)
+
 [ ] N-grams.
 
 [ ] Stopwords removal.
