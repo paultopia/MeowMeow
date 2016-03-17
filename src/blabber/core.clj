@@ -4,10 +4,20 @@
     [clojure.walk :refer [keywordize-keys]]
     [clojure.core.matrix.dataset :refer [dataset]]))
 
+(def tolower lower-case)
+
 (defn depunctuate 
   "strip punctuation from string"
   [string] 
-  (apply str (filter #(or (Character/isLetter %) (Character/isSpace %)) string)))
+  (apply str (filter #(or (Character/isLetter %) (Character/isDigit %) (Character/isSpace %)) string)))
+
+(def digit? #(Character/isDigit %))
+
+(defn denumber 
+  "strip numbers from string"
+  [string] 
+  (apply str (filter #(not (digit? %)) string)))
+
 (defn default-preprocess 
   "sensible default preprocessing" 
   [string]
@@ -19,7 +29,7 @@
 (defn count-strings 
   "count frequencies of strings in vector of vectors of strings" 
   [stringvecs]
-  (map frequencies stringvecs))   
+  (pmap frequencies stringvecs))   
 (defn list-strings 
   "list all strings in doc set" 
   [stringvecs]
@@ -40,39 +50,18 @@
       (-> stringvecs list-strings cartesian-map) 
       (-> stringvecs count-strings))))  
 
-(defn CMat-TDM 
+(defn preprocessed-TD-matrix  
   "make a core.matrix dataset from vector of preprocessed docs"
   [preprocessed-docs]
   (dataset (unsorted-TD-map preprocessed-docs)))
 
-; I don't need any of the rest of the stuff below now, core.matrix just handles the business.
-
-(defn TD-map
-  "make a sorted document-term-map of vector of preprocessed docs with keywords"
-  [preprocessed-docs]
-  (keywordize-keys  ; this is mainly for later flexibility
-    (map #(into (sorted-map) %) (unsorted-TD-map preprocessed-docs))))
-(defn TD-seqs
-  "convert document-term-map into sequence of sequences"
-  [tdmap]
-  (cons 
-    (keys (first tdmap))
-    (map vals tdmap)))
-(defn seqs-to-vecs 
-  "sequence of sequences --> vector of vectors"
-  [seqofseq]
-  (into [] (map #(into [] %) seqofseq)))
-(defn preprocessed-TD-matrix 
-  "make term document matrix as vector of vectors from vector of preprocessed docs"
-  [preprocessed-docs]
-  (-> preprocessed-docs TD-map TD-seqs seqs-to-vecs))
 (defn make-TD-matrix
   "preprocess docs then make term document matrix out of them"
   ([docs] 
    (preprocessed-TD-matrix docs))
   ([docs & funcs]
    (let [preproc (apply comp funcs)]
-     (preprocessed-TD-matrix (map preproc docs)))))
+     (preprocessed-TD-matrix (pmap preproc docs)))))
 
 
 
