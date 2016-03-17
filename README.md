@@ -22,6 +22,8 @@ FIXME
 
 [ ] Wrap major stemmers (in process).
 
+[ ] Support for sparse matrix.
+
 [ ] Sparse terms removal.
 
 [ ] N-grams.
