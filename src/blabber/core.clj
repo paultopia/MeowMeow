@@ -18,6 +18,8 @@
   [string] 
   (apply str (filter #(not (digit? %)) string)))
 
+; should probably just use remove for that rather than going wild to invert filter
+
 (defn default-preprocess 
   "sensible default preprocessing" 
   [string]
