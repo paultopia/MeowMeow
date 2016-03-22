@@ -22,6 +22,8 @@ FIXME
 
 [ ] Wrap major stemmers (in process).
 
+[ ] Modify main entry function to also take a vector of maps s.t. each map is document + keyword-denoted variables (like label + other features) (high priority)
+
 [ ] Support for sparse matrix.
 
 [ ] Sparse terms removal.
