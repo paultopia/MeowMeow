@@ -2,7 +2,7 @@
   (:require
     [clojure.string :refer [lower-case split]]
     [clojure.walk :refer [keywordize-keys]]
-    [clojure.core.matrix.dataset :refer [dataset]]
+    [clojure.core.matrix.dataset :refer [dataset merge-datasets]]
     [clojure.data.json :as json]))
 
 
@@ -76,13 +76,24 @@
 (defn extract-texts
   "map of docs and labels, like from json --> extract the docs. all labels assumed strings"
   [docmap text-label]
-  (map #(get % text-label) docmap))
+  {:texts (map #(get % text-label) docmap) :features (map #(dissoc % text-label) docmap)})
+
+(defn map-with-json [])
 
 ; this is just some test code for json functionality. will go away soon.
 (def datarecs (json/read-str (slurp "test.json")))
 (extract-texts datarecs "text")
+(make-TD-matrix (:texts (extract-texts datarecs "text")))
+(dataset (:features (extract-texts datarecs "text")))
 
-; next steps:
+; sweet I can just make a dataset out of the features.
+; so I should be able to use the merge-datasets function in core.matrix.datasets to just
+; combine the dataset of features and the dataset of texts.
+; then I don't have to refactor right now, the json function can just call the extractor,
+; wrap m-TD-m, make another dataset from features per above, and then combine the two.
+
+; next steps: [OBSOLETE]
 ; 1. define a function to merge TD-mapped docs to labels.  probably should be able to take tf-idf'ed docs too.
 ; 2. make something like make-TD-matrix-json that takes jsons instead of docs, pulls out the docs, processes, then merges
 ; this will probably require decomposing the functionality in m-TD-m to not be repetitive
+; unsorted-TD-map is really the entry point.
