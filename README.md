@@ -4,7 +4,7 @@
 
 A Clojure library with some utility functions for text-mining. Designed for:
 
-- Quick and easy drop-in use in Clojure data science workflows; and 
+- Quick and easy drop-in use in Clojure data science workflows; and
 
 - Usage in data science workflows in other languages that can benefit from JVM speed and Clojure's easy paralleism capacity. For small datasets, the JVM startup time probably isn't worth it, but for large datasets Clojure's parallelism should help, especially with stemming. (Also, the APIs of existing text-mining libraries in Python and R are way too complicated and make me sad.)
 
@@ -22,7 +22,7 @@ FIXME
 
 [ ] Wrap major stemmers (in process).
 
-[ ] Modify main entry function to also take a vector of maps s.t. each map is document + keyword-denoted variables (like label + other features) (high priority)
+[x] Modify main entry function to also take a vector of maps s.t. each map is document + keyword-denoted variables (like label + other features) (high priority)
 
 [ ] Support for sparse matrix.
 

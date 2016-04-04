@@ -80,20 +80,21 @@
 
 (defn map-with-json [])
 
+(defn doc-feature-matrix
+  "make combined matrix out of labelled data"
+  ([docmap text-label]
+   (merge-datasets (make-TD-matrix (:texts (extract-texts datarecs "text")))
+                  (dataset (:features (extract-texts datarecs "text")))))
+  ([docmap text-label & funcs]
+   (merge-datasets (apply make-TD-matrix (:texts (extract-texts datarecs "text")) funcs)
+                  (dataset (:features (extract-texts datarecs "text"))))))
+
 ; this is just some test code for json functionality. will go away soon.
 (def datarecs (json/read-str (slurp "test.json")))
-(extract-texts datarecs "text")
-(make-TD-matrix (:texts (extract-texts datarecs "text")))
-(dataset (:features (extract-texts datarecs "text")))
+(doc-feature-matrix datarecs "text")
+(doc-feature-matrix datarecs "text" denumber depunctuate tolower)
 
-; sweet I can just make a dataset out of the features.
-; so I should be able to use the merge-datasets function in core.matrix.datasets to just
-; combine the dataset of features and the dataset of texts.
-; then I don't have to refactor right now, the json function can just call the extractor,
-; wrap m-TD-m, make another dataset from features per above, and then combine the two.
+; ok, this needs some major cleanup but now I have the capacity to read a labelled json with text
+; and get a labelled tdm out of it.
 
-; next steps: [OBSOLETE]
-; 1. define a function to merge TD-mapped docs to labels.  probably should be able to take tf-idf'ed docs too.
-; 2. make something like make-TD-matrix-json that takes jsons instead of docs, pulls out the docs, processes, then merges
-; this will probably require decomposing the functionality in m-TD-m to not be repetitive
-; unsorted-TD-map is really the entry point.
+; probably the next step is to actually setup for tests.  That or do renaming and cleanup
