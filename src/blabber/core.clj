@@ -1,31 +1,20 @@
 (ns blabber.core
   (:require
     [clojure.string :refer [lower-case split]]
-    [clojure.walk :refer [keywordize-keys]]
-    [clojure.core.matrix.dataset :refer [dataset merge-datasets]]
-    [clojure.data.json :as json]))
-
+    [clojure.core.matrix.dataset :refer [dataset merge-datasets]]))
 
 (def tolower lower-case)
+; why?  because R and C use that and I don't want to memorize an extra name
 
 (defn depunctuate
   "strip punctuation from string"
   [string]
   (apply str (filter #(or (Character/isLetter %) (Character/isDigit %) (Character/isSpace %)) string)))
 
-(def digit? #(Character/isDigit %))
-
 (defn denumber
   "strip numbers from string"
   [string]
-  (apply str (filter #(not (digit? %)) string)))
-
-; should probably just use remove for that rather than going wild to invert filter
-
-(defn default-preprocess
-  "sensible default preprocessing"
-  [string]
-  (-> string depunctuate lower-case))
+  (apply str (remove #(Character/isDigit %) string)))
 
 (defn whitespace-split
   "split a vector of preprocessed strings into vector of vectors of strings on whitespace"
@@ -83,16 +72,17 @@
 (defn doc-feature-matrix
   "make combined matrix out of labelled data"
   ([docmap text-label]
-   (merge-datasets (make-TD-matrix (:texts (extract-texts datarecs "text")))
-                  (dataset (:features (extract-texts datarecs "text")))))
+   (merge-datasets (make-TD-matrix (:texts (extract-texts docmap text-label)))
+                  (dataset (:features (extract-texts docmap text-label)))))
   ([docmap text-label & funcs]
-   (merge-datasets (apply make-TD-matrix (:texts (extract-texts datarecs "text")) funcs)
-                  (dataset (:features (extract-texts datarecs "text"))))))
+   (merge-datasets (apply make-TD-matrix (:texts (extract-texts docmap text-label)) funcs)
+                  (dataset (:features (extract-texts docmap text-label))))))
 
 ; this is just some test code for json functionality. will go away soon.
-(def datarecs (json/read-str (slurp "test.json")))
-(doc-feature-matrix datarecs "text")
-(doc-feature-matrix datarecs "text" denumber depunctuate tolower)
+; (require 'clojure.data.json)
+; (def datarecs (clojure.data.json/read-str (slurp "test.json")))
+; (doc-feature-matrix datarecs "text")
+; (doc-feature-matrix datarecs "text" denumber depunctuate tolower)
 
 ; ok, this needs some major cleanup but now I have the capacity to read a labelled json with text
 ; and get a labelled tdm out of it.
