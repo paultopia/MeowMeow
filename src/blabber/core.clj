@@ -20,6 +20,7 @@
   "split a vector of preprocessed strings into vector of vectors of strings on whitespace"
   [preprocessed-docs]
   (pmap #(split % #"\s") preprocessed-docs))
+; needs to be able to accommodate a tokenizer function allowing ngrams etc.
 
 (defn count-strings
   "count frequencies of strings in vector of vectors of strings"
@@ -67,8 +68,6 @@
   [docmap text-label]
   {:texts (map #(get % text-label) docmap) :features (map #(dissoc % text-label) docmap)})
 
-(defn map-with-json [])
-
 (defn doc-feature-matrix
   "make combined matrix out of labelled data"
   ([docmap text-label]
@@ -77,6 +76,8 @@
   ([docmap text-label & funcs]
    (merge-datasets (apply make-TD-matrix (:texts (extract-texts docmap text-label)) funcs)
                   (dataset (:features (extract-texts docmap text-label))))))
+
+
 
 ; this is just some test code for json functionality. will go away soon.
 ; (require 'clojure.data.json)
@@ -88,3 +89,20 @@
 ; and get a labelled tdm out of it.
 
 ; probably the next step is to actually setup for tests.  That or do renaming and cleanup
+
+
+
+; starting some ngram functionality
+; assumption: I have a vector of tokens in original order and I want to extract ngrams of arbitrary size from it.
+
+
+(defn ngram
+  "re-tokenize word-tokenized string or char strvec into word-level ngrams of size n (no spaces)"
+  [strvec n]
+  (mapv #(apply str %) (partition n 1 strvec)))
+
+(defn char-ngram
+  "str --> character level ngrams of size n, including spaces (why? see http://www.aclweb.org/anthology/N15-1010 )"
+  [strng n]
+  (ngram (vec strng) n))
+

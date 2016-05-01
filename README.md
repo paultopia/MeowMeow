@@ -8,9 +8,11 @@ A Clojure library with some utility functions for text-mining. Designed for:
 
 - Usage in data science workflows in other languages that can benefit from JVM speed and Clojure's easy paralleism capacity. For small datasets, the JVM startup time probably isn't worth it, but for large datasets Clojure's parallelism should help, especially with stemming. (Also, the APIs of existing text-mining libraries in Python and R are way too complicated and make me sad.)
 
-Right now this is in pre-alpha, and just has term-document matrix creation, basic text manipulation (removing punctuation, removing numbers, lowercasing, etc.), and soon wrappers for some stemmers. Which is enough if you're just doing a simple bag-of-words.
+Right now this is in pre-alpha, and just has term-document matrix creation, basic text manipulation (removing punctuation, removing numbers, lowercasing, etc.), and n-grams. Which is enough if you're just doing a simple bag-of-words.
 
 Contributions solicited, either for any of the todos below, anything else you want to add, or optimizations to anything that exists.
+
+Also, I'm bored with the name, so maybe it'll have to change. (Blabbermouse?)
 
 ## Usage
 
@@ -20,40 +22,46 @@ FIXME
 
 ### TODO
 
-[ ] Wrap major stemmers (in process).
+- [ ] Wrap major stemmers.
 
-[x] Modify main entry function to also take a vector of maps s.t. each map is document + keyword-denoted variables (like label + other features) (high priority)
+- [x] Modify main entry function to also take a vector of maps s.t. each map is document + keyword-denoted variables (like label + other features) (high priority)
 
-[ ] Support for sparse matrix.
+- [ ] Support for sparse matrix.
 
-[ ] Sparse terms removal.
+- [ ] Sparse terms removal.
 
-[ ] Removal of short words by user-provided length. (Also, I suspect the current implementation with mapping over strings as characters will puke on any one-character documents.)
+- [ ] Removal of short words by user-provided length. (Also, I suspect the current implementation with mapping over strings as characters will puke on any one-character documents.)
 
-[ ] N-grams.
+- [ ] split up some namespaces would be nice
 
-[ ] Stopwords removal.
+- [x] basic n-grams.
 
-[ ] TF/IDF scores.
+- [ ] integrate n-grams into workflow
 
-[ ] Figure out how to leverage lazy data structures to handle large datasets.
+- [ ] big refactor and tidy.
 
-[ ] Tests.
+- [ ] Stopwords removal.
 
-[ ] Wrap sentiment analysis from existing NLP libraries.
+- [ ] TF/IDF scores.
 
-[ ] I/O, create interfaces for common document storage methods, dump to CSV.
+- [ ] Figure out how to leverage lazy data structures to handle large datasets.
 
-[ ] Wrap PDFBox and other readers for non-plaintext formats.
+- [ ] Tests (in process).
 
-[ ] Create Python and R interfaces (possibly as separate CLI application or via http).
+- [ ] Wrap sentiment analysis from existing NLP libraries (maybe to different library).
+
+- [ ] I/O, create interfaces for common document storage methods, dump to CSV (maybe elsewhere).
+
+- [ ] Wrap PDFBox and other readers for non-plaintext formats (maybe elsewhere).
+
+- [ ] Create Python and R interfaces (possibly as separate CLI application or via http).
 
 ## License
 
 Copyright © 2016 Paul Gowder
 
 The MIT License (MIT)
-Copyright (c) <year> <copyright holders>
+Copyright (c) <2016> <Paul Gowder>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
