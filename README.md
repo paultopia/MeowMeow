@@ -56,6 +56,8 @@ FIXME
 
 - [ ] Create Python and R interfaces (possibly as separate CLI application or via http).
 
+(notes to self: namespace organization by data level? tokenizers (including word split/1-gram and character-n-gram; make a sentence one?) as well as universal character transforms like tolower and remove punctuation operate on individual texts as single string; stemmers and word n-grams work on document as vector of tokens (and stemmers should be applied first); tf-idf (right?), sparse terms removal, tdm creation, etc., work on dataset as whole.  should also supply convenience functions to operate on dataset as a whole after applying lower-level transforms.)
+
 ## License
 
 Copyright © 2016 Paul Gowder
