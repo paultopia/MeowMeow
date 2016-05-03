@@ -1,6 +1,7 @@
-;; namespace for document-level/wide transformations: tokenizers and all-doc-character 
-;; level transformations like removing punctuation.  All functions here assume document 
-;; is a single string, and are straightforwardly mappable to entire dataset of docs
+;; namespace for document-level/wide transformations: word and char-tokenizers and 
+;; all-doc-character level transformations like removing punctuation.  All 
+;; functions here assume document is a single string, and are straightforwardly 
+;; mappable to entire dataset of docs
 (ns blabber.document
   (:require
     [clojure.string :refer [lower-case split]]))
@@ -22,3 +23,10 @@
   "split document into tokens by whitespace"
   [document]
   (split document #"\s"))
+
+(defn char-ngram
+  "split document into tokens as character level ngrams of size n, including spaces 
+  (why? see http://www.aclweb.org/anthology/N15-1010 )"
+  [strng n]
+  (ngram (vec strng) n))
+

@@ -2,19 +2,14 @@
   (:require
     [clojure.string :refer [lower-case split]]
     [clojure.core.matrix.dataset :refer [dataset merge-datasets]]
-    [blabber.document :refer :all]))
+    [blabber.document :refer :all]
+    [blabber.tokens :refer :all]))
 
 
 
-(defn depunctuate
-  "strip punctuation from string"
-  [string]
-  (apply str (filter #(or (Character/isLetter %) (Character/isDigit %) (Character/isSpace %)) string)))
 
-(defn denumber
-  "strip numbers from string"
-  [string]
-  (apply str (remove #(Character/isDigit %) string)))
+
+
 
 (defn whitespace-split
   "split a vector of preprocessed strings into vector of vectors of strings on whitespace"
@@ -101,8 +96,5 @@
   [strvec n]
   (mapv #(apply str %) (partition n 1 strvec)))
 
-(defn char-ngram
-  "str --> character level ngrams of size n, including spaces (why? see http://www.aclweb.org/anthology/N15-1010 )"
-  [strng n]
-  (ngram (vec strng) n))
+
 
