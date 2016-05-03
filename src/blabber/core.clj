@@ -1,10 +1,10 @@
 (ns blabber.core
   (:require
     [clojure.string :refer [lower-case split]]
-    [clojure.core.matrix.dataset :refer [dataset merge-datasets]]))
+    [clojure.core.matrix.dataset :refer [dataset merge-datasets]]
+    [blabber.document :refer :all]))
 
-(def tolower lower-case)
-; why?  because R and C use that and I don't want to memorize an extra name
+
 
 (defn depunctuate
   "strip punctuation from string"
