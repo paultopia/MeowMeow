@@ -30,3 +30,4 @@
   [strng n]
   (ngram (vec strng) n))
 
+;; do I need a punctuation tokenizer too?

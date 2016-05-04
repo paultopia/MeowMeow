@@ -9,14 +9,6 @@
 
 
 
-
-
-(defn whitespace-split
-  "split a vector of preprocessed strings into vector of vectors of strings on whitespace"
-  [preprocessed-docs]
-  (pmap #(split % #"\s") preprocessed-docs))
-; needs to be able to accommodate a tokenizer function allowing ngrams etc.
-
 (defn count-strings
   "count frequencies of strings in vector of vectors of strings"
   [stringvecs]
@@ -45,11 +37,13 @@
       (-> stringvecs list-strings cartesian-map)
       (-> stringvecs count-strings))))
 
+;; get rid of me: not relying on core.matrix anymore.
 (defn preprocessed-TD-matrix
   "make a core.matrix dataset from vector of preprocessed docs"
   [preprocessed-docs]
   (dataset (unsorted-TD-map preprocessed-docs)))
 
+;; get rid of me: not relying on core.matrix anymore, and not passing functions in this way.
 (defn make-TD-matrix
   "preprocess docs then make term document matrix out of them"
   ([docs]
@@ -63,6 +57,8 @@
   [docmap text-label]
   {:texts (map #(get % text-label) docmap) :features (map #(dissoc % text-label) docmap)})
 
+;; this should now just call to the implementation in the tdm namespace. plus something in 
+;; some other namespace to handle feature labels. (Tdm namespace just makes a tdm w/o labels)
 (defn doc-feature-matrix
   "make combined matrix out of labelled data"
   ([docmap text-label]
@@ -91,10 +87,6 @@
 ; assumption: I have a vector of tokens in original order and I want to extract ngrams of arbitrary size from it.
 
 
-(defn ngram
-  "re-tokenize word-tokenized string or char strvec into word-level ngrams of size n (no spaces)"
-  [strvec n]
-  (mapv #(apply str %) (partition n 1 strvec)))
 
 
 
