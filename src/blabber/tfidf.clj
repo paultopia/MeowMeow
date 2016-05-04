@@ -39,12 +39,6 @@
   (let [tf (float (/ count-t num-tokens)) idf (Math/log (/ numdocs numdocs-t))]
     (* tf idf)))
 
-; used for testing basic logic in a clojurescript repl
-; (defn- item-normalized
-;   [count-t num-tokens numdocs numdocs-t]
-;   (let [tf (/ count-t num-tokens) idf (/ numdocs numdocs-t)]
-;     (* tf idf)))
-
 (defn- item-raw
   [count-t _ numdocs numdocs-t]
   (let [idf (Math/log (/ numdocs numdocs-t))]
