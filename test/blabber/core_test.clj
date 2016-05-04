@@ -3,11 +3,8 @@
             [blabber.core :refer :all]))
 
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
-
-; obsolete the moment it's written.
+; this next test is obsolete because I've mucked with the api the moment it's written.
+; also blabber.core needs to be fixed.
 
 (deftest basic-matrix
   (testing "Can compute basic TDM without transformations."
@@ -21,4 +18,12 @@
 (deftest character-ngram
   (testing "can generate character ngrams from a string"
     (is (= ["te" "e," ", " " s" "st"] (char-ngram "te, st" 2)))))
+
+(deftest tfidf-calc
+  (testing "can calculate normalized tf-idf scores"
+    (is (= [[0.0 0.0 0.0] [0.1013662770270411 0.0 0.0] [0.11584717892396205 0.0 0.0]] (tfidf [[0 1 2] [3 4 5] [6 7 8]])))))
+
+(deftest tfidf-raw
+  (testing "can calculate raw tf-idf scores"
+    (is (= [[0.0 0.0 0.0] [1.2163953243244932 0.0 0.0] [2.4327906486489863 0.0 0.0]] (tfidf [[0 1 2] [3 4 5] [6 7 8]] :raw)))))
 

@@ -3,7 +3,9 @@
     [clojure.string :refer [lower-case split]]
     [clojure.core.matrix.dataset :refer [dataset merge-datasets]]
     [blabber.document :refer :all]
-    [blabber.tokens :refer :all]))
+    [blabber.tokens :refer :all]
+    [blabber.tdm :refer :all]
+    [blabber.tfidf :refer :all]))
 
 
 

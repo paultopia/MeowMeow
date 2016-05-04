@@ -6,7 +6,7 @@
 ;; Normalized: 
 ;; tf = (/ (count of token T in document D) (number of tokens in D))
 ;; 
-;; un-normalized (raw):
+;; Nn-normalized (raw):
 ;; tf = (count of token T in document D)
 ;;
 ;; in all cases, 
@@ -24,15 +24,6 @@
 
 
 (ns blabber.tfidf)
-
-
-
-(defn in? 
-  "true if coll contains elm"
-  [coll elm]  
-  (some #(= elm %) coll))
-;; it's really annoying that this isn't in clojure.core
-;; see http://stackoverflow.com/questions/3249334/test-whether-a-list-contains-a-specific-value-in-clojure
 
 (defn- item-normalized
   [count-t num-tokens numdocs numdocs-t]
@@ -69,12 +60,12 @@
 (defn- level-two
   "function to map over rows"
   [kw colvec numdocs row numtokens]
-  (map (partial level-three kw numdocs numtokens) row colvec))
+  (mapv (partial level-three kw numdocs numtokens) row colvec))
 
 (defn- level-one
   "function that maps over rows"
   [kw tdm]
-  (map (partial level-two kw (get-numdocs-tokens tdm) (count tdm)) tdm (get-numtokens-rows tdm)))
+  (mapv (partial level-two kw (get-numdocs-tokens tdm) (count tdm)) tdm (get-numtokens-rows tdm)))
 
 
 (defn tfidf
@@ -85,7 +76,3 @@
     (= flag :raw) 
     	(level-one :raw tdm)
     	(level-one :normalized tdm))))
-
-
-; for testing: 
-; (def testmat [[0 1 2] [3 4 5] [6 7 8]])
