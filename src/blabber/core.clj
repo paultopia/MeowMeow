@@ -8,35 +8,6 @@
 
 
 
-
-(defn count-strings
-  "count frequencies of strings in vector of vectors of strings"
-  [stringvecs]
-  (pmap frequencies stringvecs))
-
-(defn list-strings
-  "list all strings in doc set"
-  [stringvecs]
-  (distinct
-    (apply concat stringvecs)))
-
-(defn cartesian-map
-  [stringlist]
-  (zipmap stringlist (repeat 0)))
-
-(defn sparsify-counts
-  "based on strings in all preprocesed docs, fill counts with 0 for unused strings in each single preprocessed doc"
-  [zeroes counts]
-  (map #(merge-with + % zeroes) counts))
-
-(defn unsorted-TD-map
-  "split vector of preprocessed docs by spaces then make zero-filled map of counts"
-  [preprocessed-docs]
-  (let [stringvecs (whitespace-split preprocessed-docs)]
-    (sparsify-counts
-      (-> stringvecs list-strings cartesian-map)
-      (-> stringvecs count-strings))))
-
 ;; get rid of me: not relying on core.matrix anymore.
 (defn preprocessed-TD-matrix
   "make a core.matrix dataset from vector of preprocessed docs"
