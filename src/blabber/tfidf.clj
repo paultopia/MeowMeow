@@ -22,14 +22,6 @@
 ;; otherwise, (tfidf YOUR-TDM :normalized) or (tfidf YOUR-TDM :raw)
 
 
-;; each row requires single element of rowsums and each element of column sums.
-;; each item in row is function of rowsums[row] and columnsum[i]
-
-; outer level just calculates the rowsums, colsums, and count
-; level 2 loops over rows with loop-recur, passing in the first element of rowsums
-; (plus colsums, plus count)
-; and then loops with the rest.
-; level 3 maps over a row, plus the vector of column sums
 
 (ns blabber.tfidf)
 
@@ -42,15 +34,16 @@
 ;; it's really annoying that this isn't in clojure.core
 ;; see http://stackoverflow.com/questions/3249334/test-whether-a-list-contains-a-specific-value-in-clojure
 
-; (defn- item-normalized
-;   [count-t num-tokens numdocs numdocs-t]
-;   (let [tf (float (/ count-t num-tokens)) idf (Math/log (/ numdocs numdocs-t))]
-;     (* tf idf)))
-
 (defn- item-normalized
   [count-t num-tokens numdocs numdocs-t]
-  (let [tf (/ count-t num-tokens) idf (/ numdocs numdocs-t)]
+  (let [tf (float (/ count-t num-tokens)) idf (Math/log (/ numdocs numdocs-t))]
     (* tf idf)))
+
+; used for testing basic logic in a clojurescript repl
+; (defn- item-normalized
+;   [count-t num-tokens numdocs numdocs-t]
+;   (let [tf (/ count-t num-tokens) idf (/ numdocs numdocs-t)]
+;     (* tf idf)))
 
 (defn- item-raw
   [count-t _ numdocs numdocs-t]
@@ -100,4 +93,5 @@
     	(level-one :normalized tdm))))
 
 
-(def testmat [[0 1 2] [3 4 5] [6 7 8]])
+; for testing: 
+; (def testmat [[0 1 2] [3 4 5] [6 7 8]])
