@@ -21,3 +21,8 @@
   
   (def count-column-presences (memoize ccp))
   
+  (defn filter-by-other 
+    [target test pred]
+    (let [pairs (apply map vector [target test])]
+      (mapv first (filter #(pred (second %)) pairs))
+      ))
