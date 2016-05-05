@@ -33,17 +33,33 @@
 
 (deftest basic-ngram
   (testing "can generate ngrams from a vector of strings"
-    (is (= ["catdog" "dogmeow" "meowwoof" "woofkitty"] (MeowMeow.tokens/ngram ["cat" "dog" "meow" "woof" "kitty"] 2)))))
+    (is (= ["catdog" "dogmeow" "meowwoof" "woofkitty"] 
+           (MeowMeow.tokens/ngram ["cat" "dog" "meow" "woof" "kitty"] 2)))))
 
 (deftest character-ngram
   (testing "can generate character ngrams from a string"
-    (is (= ["te" "e," ", " " s" "st"] (MeowMeow.document/char-ngram "te, st" 2)))))
+    (is (= ["te" "e," ", " " s" "st"] 
+           (MeowMeow.document/char-ngram "te, st" 2)))))
 
 (deftest tfidf-calc
   (testing "can calculate normalized tf-idf scores"
-    (is (= [[0.0 0.0 0.0] [0.1013662770270411 0.0 0.0] [0.11584717892396205 0.0 0.0]] (MeowMeow.tfidf/tfidf [[0 1 2] [3 4 5] [6 7 8]])))))
+    (is (= [[0.0 0.0 0.0] [0.1013662770270411 0.0 0.0] [0.11584717892396205 0.0 0.0]] 
+           (MeowMeow.tfidf/tfidf [[0 1 2] [3 4 5] [6 7 8]])))))
 
 (deftest tfidf-raw
   (testing "can calculate raw tf-idf scores"
-    (is (= [[0.0 0.0 0.0] [1.2163953243244932 0.0 0.0] [2.4327906486489863 0.0 0.0]] (MeowMeow.tfidf/tfidf [[0 1 2] [3 4 5] [6 7 8]] :raw)))))
+    (is (= [[0.0 0.0 0.0] [1.2163953243244932 0.0 0.0] [2.4327906486489863 0.0 0.0]] 
+           (MeowMeow.tfidf/tfidf [[0 1 2] [3 4 5] [6 7 8]] :raw)))))
+
+(deftest stopwords-default
+  (testing "can remove default stopwords"
+    (is (= ["kitty" "meow"] 
+           (MeowMeow.tokens/remove-stopwords ["this" "is" "a" "kitty" "meow"])))))
+
+(deftest stopwords-custom
+  (testing "can remove custom stopwords"
+    (is (= ["this" "is" "a" "meow"] 
+           (MeowMeow.tokens/remove-stopwords ["this" "is" "a" "kitty" "meow"] #{"kitty"})))))
+
+
 
