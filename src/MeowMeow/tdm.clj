@@ -14,7 +14,7 @@
 ;;
 ;; this should all just pass seamlessly to any core.matrix flavor.
 
-(ns blabber.tdm)
+(ns MeowMeow.tdm)
 
 ;; private functions
 

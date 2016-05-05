@@ -1,6 +1,6 @@
 ;; helper functions that show up in multiple namespaces.
 
-(ns blabber.utilities)
+(ns MeowMeow.utilities)
 
 (defn- numdocs-t-helper
   "given a column represented as a bunch of individual entries in that column, 

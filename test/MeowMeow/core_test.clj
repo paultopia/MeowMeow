@@ -1,6 +1,6 @@
-(ns blabber.core-test
+(ns MeowMeow.core-test
   (:require [clojure.test :refer :all]
-            [blabber.core :refer :all]))
+            [MeowMeow.core :refer :all]))
 
 
 ; this next test is obsolete because I've mucked with the api the moment it's written.

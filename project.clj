@@ -1,6 +1,6 @@
-(defproject blabber "0.1.0-SNAPSHOT"
+(defproject MeowMeow "0.1.0"
   :description "A text-mining utility library."
-  :url "https://github.com/paultopia/blabber"
+  :url "https://github.com/paultopia/MeowMeow"
   :license {:name "MIT License"
             :url "https://opensource.org/licenses/MIT"}
   :dependencies [[org.clojure/clojure "1.8.0"] 

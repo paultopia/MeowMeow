@@ -3,7 +3,7 @@
 ;; tokenization.  (inefficient I suppose), also including stemmers. 
 ;; all fxns mappable to entire dataset of tokenized docs
 
-(ns blabber.tokens
+(ns MeowMeow.tokens
   (:require
     [stemmer.snowball :as snowball]))
 

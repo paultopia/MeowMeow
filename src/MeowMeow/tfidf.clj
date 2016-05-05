@@ -23,8 +23,8 @@
 
 
 
-(ns blabber.tfidf
-  (:require [blabber.utilities :refer [count-column-presences]]))
+(ns MeowMeow.tfidf
+  (:require [MeowMeow.utilities :refer [count-column-presences]]))
 
 (defn- item-normalized
   [count-t num-tokens numdocs numdocs-t]

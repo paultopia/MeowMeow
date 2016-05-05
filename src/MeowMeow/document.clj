@@ -2,7 +2,7 @@
 ;; all-doc-character level transformations like removing punctuation.  All 
 ;; functions here assume document is a single string, and are straightforwardly 
 ;; mappable to entire dataset of docs
-(ns blabber.document
+(ns MeowMeow.document
   (:require
     [clojure.string :refer [lower-case split]]))
 
