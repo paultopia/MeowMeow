@@ -28,6 +28,6 @@
   "split document into tokens as character level ngrams of size n, including spaces 
   (why? see http://www.aclweb.org/anthology/N15-1010 )"
   [strng n]
-  (ngram (vec strng) n))
+  (mapv #(apply str %) (vec (partition n 1 (vec strng)))))
 
 ;; do I need a punctuation tokenizer too?

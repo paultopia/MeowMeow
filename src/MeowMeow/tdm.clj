@@ -55,11 +55,3 @@
   (let [smaps (mapv #(into (sorted-map) %) tdmaps)]
     {:labels (keys (first smaps)) 
      :frequencies (mapv vals smaps)}))
-
-;; this is all tested and correct, albeit in clojurescript rather than clojure...
-
-;; (def testdocs [["One" "Two" "Three"] ["Ay" "Bee" "Cee"] ["One" "Ay" "One" "Bee" "One" "Ay"]])
-;; (td-maps testdocs)
-;; [{"One" 1, "Two" 1, "Three" 1, "Ay" 0, "Bee" 0, "Cee" 0} {"Ay" 1, "Bee" 1, "Cee" 1, "One" 0, "Two" 0, "Three" 0} {"One" 3, "Ay" 2, "Bee" 1, "Two" 0, "Three" 0, "Cee" 0}]
-;; (td-matrix (td-maps testdocs))
-;; {:labels ("Ay" "Bee" "Cee" "One" "Three" "Two"), :frequencies [(0 0 0 1 1 1) (1 1 1 0 0 0) (2 1 0 3 0 0)]}

@@ -3,13 +3,26 @@
             [MeowMeow.core :refer :all]))
 
 
-; this next test is obsolete because I've mucked with the api the moment it's written.
-; also blabber.core needs to be fixed.
 
-(deftest basic-matrix
-  (testing "Can compute basic TDM without transformations."
-    (is (= [[:cat :is :this :words :dog :and :meow :woof :a] [1 1 1 0 0 0 0 0 1] [0 1 1 0 1 0 0 0 1] [0 0 0 0 0 1 1 1 1] [0 0 0 1 0 0 2 3 0]]
-           (make-TD-matrix ["this is a cat" "this is a dog" "woof and a meow" "woof woof woof meow meow words"])))))
+
+;; this is all tested and correct, albeit in clojurescript rather than clojure...
+
+;; (def testdocs [["One" "Two" "Three"] ["Ay" "Bee" "Cee"] ["One" "Ay" "One" "Bee" "One" "Ay"]])
+;; (td-maps testdocs)
+;; [{"One" 1, "Two" 1, "Three" 1, "Ay" 0, "Bee" 0, "Cee" 0} {"Ay" 1, "Bee" 1, "Cee" 1, "One" 0, "Two" 0, "Three" 0} {"One" 3, "Ay" 2, "Bee" 1, "Two" 0, "Three" 0, "Cee" 0}]
+;; (td-matrix (td-maps testdocs))
+;; {:labels ("Ay" "Bee" "Cee" "One" "Three" "Two"), :frequencies [(0 0 0 1 1 1) (1 1 1 0 0 0) (2 1 0 3 0 0)]}
+
+(deftest tdmap 
+  (testing "can generate td-map from matrix of tokens"
+    (is (= [{"One" 1, "Two" 1, "Three" 1, "Ay" 0, "Bee" 0, "Cee" 0} {"Ay" 1, "Bee" 1, "Cee" 1, "One" 0, "Two" 0, "Three" 0} {"One" 3, "Ay" 2, "Bee" 1, "Two" 0, "Three" 0, "Cee" 0}]
+           (td-maps [["One" "Two" "Three"] ["Ay" "Bee" "Cee"] ["One" "Ay" "One" "Bee" "One" "Ay"]])))))
+
+(deftest tdmatrix 
+  (testing "can generate td-map from matrix of tokens"
+    (is (= {:labels ("Ay" "Bee" "Cee" "One" "Three" "Two"), :frequencies [(0 0 0 1 1 1) (1 1 1 0 0 0) (2 1 0 3 0 0)]}
+           (td-matrix (td-maps [["One" "Two" "Three"] ["Ay" "Bee" "Cee"] ["One" "Ay" "One" "Bee" "One" "Ay"]]))))))
+
 
 (deftest basic-ngram
   (testing "can generate ngrams from a vector of strings"
