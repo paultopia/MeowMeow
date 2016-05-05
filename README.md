@@ -1,6 +1,4 @@
-(work in progress, it'll meet the description below when I finally stick it up on clojars)
-
-# Blabber
+# MeowMeow
 
 A Clojure library with some utility functions for text-mining. Designed for:
 
@@ -8,11 +6,10 @@ A Clojure library with some utility functions for text-mining. Designed for:
 
 - Usage in data science workflows in other languages that can benefit from JVM speed and Clojure's easy paralleism capacity. For small datasets, the JVM startup time probably isn't worth it, but for large datasets Clojure's parallelism should help, especially with stemming. (Also, the APIs of existing text-mining libraries in Python and R are way too complicated and make me sad.)
 
-Right now this is in pre-alpha, and just has term-document matrix creation, basic text manipulation (removing punctuation, removing numbers, lowercasing, etc.), and n-grams. Which is enough if you're just doing a simple bag-of-words.
+Right now this is in early stage, and just has term-document matrix creation, basic text manipulation (removing punctuation, removing numbers, lowercasing, etc.), tf-idf scoring, and n-grams. The long-term goal is to replicate
 
 Contributions solicited, either for any of the todos below, anything else you want to add, or optimizations to anything that exists.
 
-Also, I'm bored with the name, so maybe it'll have to change. (Blabbermouse?)
 
 ## Usage
 

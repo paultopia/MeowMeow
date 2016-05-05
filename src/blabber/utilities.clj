@@ -21,6 +21,3 @@
   
   (def count-column-presences (memoize ccp))
   
-  ;; it turns out that clojure memoization can test for equality by reference
-  ;; first, i.e., avoid looking at big matrices again for multiple uses of the 
-  ;; column count (at least judging by a bit of criterion benchmarking) 
