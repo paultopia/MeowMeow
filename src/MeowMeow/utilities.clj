@@ -23,6 +23,11 @@
   
   (defn filter-by-other 
     [target test pred]
-    (let [pairs (apply map vector [target test])]
-      (mapv first (filter #(pred (second %)) pairs))
-      ))
+    (let [pairs (map vector target test)]
+      (mapv first (filter #(pred (second %)) pairs))))
+
+;; filters target based on applying pred to test.  probably will blow up 
+;; with infinite sequences, and god only knows what will 
+;; happen with lazy ones.  Assumes target and test are vectors of equal length, 
+;; pred is a single-arity function 
+
