@@ -41,14 +41,22 @@
   (mapv #(apply + %) tdm))
 
 (defn- numdocs-t-helper
-  [column]
-  (count (filter #(< 0 %) column)))
+  "given a column represented as a bunch of individual entries in that column, 
+  (NOT as a vector) returns the number of entries that are above zero"
+  [& args]
+  (count (filter #(< 0 %) args)))
 
 (defn- get-numdocs-tokens
-  "this is the count of documents in which a given token appears (columnvec)"
+  "this is the count of documents in which a given token appears (columnvec)
+  ...
+  note to self for future reference: this is the same sneaky trick that lets you 
+  transpose a matrix by (apply map vector matrix) --- map when given n sequences 
+  takes the first from each sequence, then the second from each sequence, etc. -- 
+  so when given map applied over a sequence of rows, it's like mapping over 
+  a sequence of columns without apply"
   [tdm]
-  (let [transpose (apply mapv vector tdm)]
-    (mapv numdocs-t-helper transpose)))
+  (apply map numdocs-t-helper tdm))
+
 
 (defn- level-three
   "function to map over items"
