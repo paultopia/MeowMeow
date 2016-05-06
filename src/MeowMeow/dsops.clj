@@ -20,7 +20,7 @@
 (defn sparsity 
   [dataset level]
   (let [bigds (conj (:frequencies dataset) (:labels dataset)) sps (sparsity bigds level)]
-    {:labels (last sps) :frequencies WHAT-IS-THE-REST-EXCEPT-LAST??}))
+    {:labels (last sps) :frequencies (vector (drop-last sps))}))
 ;;
 
 ;; this one is a little harder.  just concatenating it from bottom and .
