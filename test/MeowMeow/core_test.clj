@@ -5,7 +5,8 @@
             [MeowMeow.tokens]
             [MeowMeow.document]
             [MeowMeow.tfidf]
-            [MeowMeow.utilities]))
+            [MeowMeow.utilities]
+            [MeowMeow.sparsity]))
 
 
 
@@ -61,5 +62,8 @@
     (is (= ["this" "is" "a" "meow"] 
            (MeowMeow.tokens/remove-stopwords ["this" "is" "a" "kitty" "meow"] #{"kitty"})))))
 
-
+(deftest sparsity
+  (testing "can remove uncommon tokens"
+    (is (= [[1 1] [2 3] [2 3]] 
+           (MeowMeow.sparsity/filter-sparsity [[0 1 1] [1 2 3] [1 2 3]] 0.9)))))
 
