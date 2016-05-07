@@ -43,14 +43,18 @@
 
 (defn td-maps
   "vector of tokenized documents --> vector of maps with counts, including zeroes for terms 
-  that do not appear in a given document"
+  that do not appear in a given document.  Note that this is suitable for passing directly 
+  into a core.mayrix dataset if that suits your fancy."
   [token-vecs]
     (sparsify-counts
       (-> token-vecs list-strings cartesian-map)
       (-> token-vecs count-strings)))
 
 (defn td-matrix
-  "vector of matrices --> TDM proper as map w/ :labels :data"
+  "vector of matrices --> TDM proper as map w/ :labels :data.  N.B. to pass 
+  it to something that implements the core.matrix dataset protocol, just 
+  send the labels as a vector and the frequencies as nested vectors, like 
+  (clojure.core.matrix.dataset/dataset (:labels your-tdm) (:frequencies your-tdm))"
   [tdmaps]
   (let [smaps (mapv #(into (sorted-map) %) tdmaps)]
     {:labels (keys (first smaps)) 
