@@ -21,6 +21,19 @@
   [dataset level]
   (let [bigds (conj (:frequencies dataset) (:labels dataset)) sps (sparsity bigds level)]
     {:labels (last sps) :frequencies (vec (doall (drop-last sps)))}))
+
+(defn- merge-mat [firstd secondd] (mapv (comp vec flatten vector) firstd secondd))
+
+(defn merge-data
+  "suppose you've got a term-document matrix here, plus a separate non-text-mined 
+  feature dataset from the same set of documents. It would be nice to combine them. 
+  Send them to this fxn (tdm first) in the same format as tdm datasets here 
+  (as a map with a :labels vector and a :frequencies vector of vectors)"
+  [termdataset featuredataset]
+  {:labels ((comp vec flatten vector) (:labels termdataset) (:labels featuredataset))
+   :frequencies (merge-mat (:frequencies termdataset) (:frequencies featuredataset))})
+
+
 ;;
 
 ;; this one is a little harder.  just concatenating it from bottom and .
