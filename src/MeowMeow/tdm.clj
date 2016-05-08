@@ -1,20 +1,15 @@
-;; this namespace just contains a function to create a term-document matrix out of a collection of 
-;; tokenized strings (seqable of seqable) (vectors, sequences, whev.).  
-
-;; There are two public functions.  The first, td-maps, takes a straight seqable of seqable, 
-;; and produces a vector of maps where each map represents a document and is 
-;; {:token1 count token2: count...} for every token that appears in the entire dataset
-;;
-;; The second, td-matrix takes a td-map and converts it to a single map: 
-;; {:labels [vector of token labels] :frequencies [vec of seqs]} where the 
-;; frequency vector-of-seqs is in standard term-document-matrix format (i.e., 
-;; documents on the rows, counts on the columns) and labels are keywords
-;; 
-;; so obviously, the thing to do ordinarily is (td-matrix (td-map your-tokenized-dataset))
-;;
-;; this should all just pass seamlessly to any core.matrix flavor.
-
-(ns MeowMeow.tdm)
+(ns MeowMeow.tdm
+  "functions to create a term-document matrix out of a collection of 
+tokenized strings (seqable of seqable) (vectors, sequences, whev.).  
+There are two public functions.  The first, td-maps, takes a straight seqable of seqable, 
+and produces a vector of maps where each map represents a document and is 
+{:token1 count token2: count...} for every token that appears in the entire dataset
+The second, td-matrix takes a td-map and converts it to a single map: 
+{:labels [vector of token labels] :frequencies [vec of seqs]} where the 
+frequency vector-of-seqs is in standard term-document-matrix format (i.e., 
+documents on the rows, counts on the columns) and labels are keywords
+So obviously, the thing to do ordinarily is (td-matrix (td-map your-tokenized-dataset))
+This should all just pass seamlessly to any core.matrix flavor.")
 
 ;; private functions
 
@@ -37,7 +32,6 @@
   "based on strings in all preprocesed docs, fill counts with 0 for unused strings in each single preprocessed doc"
   [zeroes counts]
   (mapv #(merge-with + % zeroes) counts))
-
 
 ;; public functions follow
 

@@ -1,9 +1,8 @@
 (ns MeowMeow.sparsity
-  (:require [MeowMeow.utilities :refer :all]))
+"sparsity: take decimal from user 
+filter columns by frequencies list/numdocs > that decimal."
+    (:require [MeowMeow.utilities :refer :all]))
 
-;; sparsity: 
-;; take decimal from user 
-;; filter columns by frequencies list/numdocs > that decimal. 
 
 (defn- rowfilter
   [row level tester]

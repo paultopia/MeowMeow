@@ -1,9 +1,9 @@
-;; namespace for document-level/wide transformations: word and char-tokenizers and 
-;; all-doc-character level transformations like removing punctuation.  All 
-;; functions here assume document is a single string, and are straightforwardly 
-;; mappable to entire dataset of docs
 (ns MeowMeow.document
-  (:require
+"namespace for document-level/wide transformations: word and char-tokenizers and 
+all-doc-character level transformations like removing punctuation.  All 
+functions here assume document is a single string, and are straightforwardly 
+mappable to entire dataset of docs"
+    (:require
     [clojure.string :refer [lower-case split]]))
 
 (def tolower lower-case)

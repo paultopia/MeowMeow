@@ -1,29 +1,23 @@
-;; calculate tf-idf scores from tdm as defined by td-matrix in the tdm namespace
-;; and just return labelled matrix of tf-idf scores
-;;
-;; supplies a normalized version (default) and an un-normalized version. 
-;;
-;; Normalized: 
-;; tf = (/ (count of token T in document D) (number of tokens in D))
-;; 
-;; Nn-normalized (raw):
-;; tf = (count of token T in document D)
-;;
-;; in all cases, 
-;; idf = (ln (/ (count of documents) (count of documents containing T)))
-;; tf-idf = (* tf idf)
-;;
-;; some people seem to think that TF should be normalized by number of 
-;; unique tokens, but I don't imagine that makes a difference for 
-;; practical purposes, if someone wants to implement that as an alternative 
-;; I'll happily take a PR. 
-;; 
-;; api: for default, (tfidf YOUR-TDM), 
-;; otherwise, (tfidf YOUR-TDM :normalized) or (tfidf YOUR-TDM :raw)
 
 
 
 (ns MeowMeow.tfidf
+  "calculate tf-idf scores from tdm as defined by td-matrix in the tdm namespace
+and just return labelled matrix of tf-idf scores
+supplies a normalized version (default) and an un-normalized version. 
+Normalized: 
+tf = (/ (count of token T in document D) (number of tokens in D))
+Non-normalized (raw):
+tf = (count of token T in document D)
+in all cases, 
+idf = (ln (/ (count of documents) (count of documents containing T)))
+tf-idf = (* tf idf)
+some people seem to think that TF should be normalized by number of 
+unique tokens, but I don't imagine that makes a difference for 
+practical purposes, if someone wants to implement that as an alternative 
+I'll happily take a PR. 
+api: for default, (tfidf YOUR-TDM), 
+otherwise, (tfidf YOUR-TDM :normalized) or (tfidf YOUR-TDM :raw)"
   (:require [MeowMeow.utilities :refer [count-column-presences]]))
 
 (defn- item-normalized
