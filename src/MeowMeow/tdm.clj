@@ -57,5 +57,5 @@
   (clojure.core.matrix.dataset/dataset (:labels your-tdm) (:frequencies your-tdm))"
   [tdmaps]
   (let [smaps (mapv #(into (sorted-map) %) tdmaps)]
-    {:labels (keys (first smaps)) 
+    {:labels (vec (keys (first smaps))) 
      :frequencies (mapv vals smaps)}))
