@@ -53,3 +53,7 @@ This should all just pass seamlessly to any core.matrix flavor.")
   (let [smaps (mapv #(into (sorted-map) %) tdmaps)]
     {:labels (vec (keys (first smaps))) 
      :frequencies (mapv vals smaps)}))
+
+;; this needs a refactor.  New concept/abstraction: featurizer---function that 
+; gets features from documents.  Pass it to any seqable of documents and get back 
+; a map or matrix.  Not just tokenizers but also regex extraction and other parsers.
