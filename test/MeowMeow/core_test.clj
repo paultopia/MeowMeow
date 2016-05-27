@@ -7,7 +7,8 @@
             [MeowMeow.tfidf :as tfi]
             [MeowMeow.utilities :as uti]
             [MeowMeow.sparsity :as spa]
-            [MeowMeow.dsops :as dso]))
+            [MeowMeow.dsops :as dso]
+            [MeowMeow.featurizer :as fea]))
 
 (def testtokens [["One" "Two" "Three"] ["Ay" "Bee" "Cee"] ["One" "Ay" "One" "Bee" "One" "Ay"]])
 
@@ -70,5 +71,12 @@
   (testing "can calculate tf-idf scores on datasets"
     (is (= {:frequencies [[0.0 0.0 0.0] [0.1013662770270411 0.0 0.0] [0.11584717892396205 0.0 0.0]] :labels [:a :b :c]} 
            (dso/tfidf {:labels [:a :b :c] :frequencies [[0 1 2] [3 4 5] [6 7 8]]})))))
+
+(deftest featurizer-basic
+  (testing "can make counts map from arbitrary featurizer function"
+    (is (= [{"at" 2} {"at" 3}] 
+           (fea/featurizer 
+             ["the cat makes you go splat, because" "that cat has a bat"] 
+             (partial re-seq #"at"))))))
 
 

@@ -46,3 +46,12 @@
 ;  taking preexisting maps of text + feature and combining them, taking regexes 
 ;  and applying as featurizer functions, etc."
 
+; also make it return original text and change tests accordingly?  or is that an 
+; unnecessarily big refactor?  Instead, can I write a workflow to just combine feature 
+; extraction tasks or add extracted features to an existing map?
+;
+; that latter is the way to go I think: in this NS, write something to add 
+; features to an existing td-map or td-matrix, that also checks existing 
+; keys/columns (recursively), renames to avoid conflicts, and returns new one.
+ 
+
