@@ -6,10 +6,23 @@ A Clojure library with some utility functions for text-mining. Designed for:
 
 - Usage in data science workflows in other languages that can benefit from JVM speed and Clojure's easy paralleism capacity. For small datasets, the JVM startup time probably isn't worth it, but for large datasets Clojure's parallelism should help, especially with stemming. (Also, the APIs of existing text-mining libraries in Python and R are way too complicated and make me sad.)
 
-Right now this is in early stage, and just has term-document matrix creation, basic text manipulation (removing punctuation, removing numbers, lowercasing, etc.), tf-idf scoring, and n-grams. The long-term goal is to replicate
+Right now this is in early stage, and just has term-document matrix creation, basic text manipulation (removing punctuation, removing numbers, lowercasing, etc.), tf-idf scoring, and n-grams. The long-term goal is to replicate the functionality of packages like R's TM, but more usable.
+
+Another planned future development is a standalone application, built on this library, that can just accept and transform data from the commandline, or through starting a local HTTP server. 
 
 Contributions solicited, either for any of the todos below, anything else you want to add, or optimizations to anything that exists.
 
+## Conceptual Framework and Manifesto
+
+(n.b. none of this stuff is built yet, it's really the vision I have by the time of first release.  which should be soon, because I need this for another project.)
+
+In order to get useful features out of text data, represented as a vector of documents, you need to generate tokens with **tokenizers**, which can be things like individual words, n-grams, character strings, regular expression matches, fuzzy regular expression matches, etc. Various tokenizers to create tokens have **options**, like "don't include punctuation" or "ignore case." Token sets can be subject to **transformations**, such as sparse terms removal, stemming (for word tokens), tf-idf scoring, etc. 
+
+Let's call an internally consistent composition of tokenizers, options, and transformations a **feature representation**. To be maximally useful, a library for feature enginnering of documents should allow users to apply multiple inconsistent feature representations to a set of documents, such that, for example, columns 1-n of a feature matrix are word counts, while n+1-m are sentences or characters or n-grams. 
+
+Users should also be able to easily update feature representations with the addition of new documents---each feature representation should contain enough information to permit, e.g., users to store a document set in an atom and then hang a watcher on it, such that the addition of new documents automatically updates the feature matrix (including updating rows for preexisting documents to the extent those rows depend on new information, such as potential new information about the overall frequency of terms).
+
+That's the goal. Working on it.
 
 ## Usage
 
