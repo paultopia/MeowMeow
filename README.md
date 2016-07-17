@@ -1,4 +1,3 @@
-# Tzara
 
 > To make a Dadaist poem:
 
@@ -23,6 +22,8 @@
 > And here are you a writer, infinitely original and endowed with a sensibility that is charming though beyond the understanding of the vulgar.
 
 - Tristan Tzara
+
+# Tzara
 
 A Clojure library with some utility functions for text-mining. Designed for:
 
@@ -62,11 +63,11 @@ FIXME
 
 - [ ] Support for sparse matrix.
 
-- [ ] Sparse terms removal.
+- [x] Sparse terms removal.
 
 - [ ] Removal of short words by user-provided length. (Also, I suspect the current implementation with mapping over strings as characters will puke on any one-character documents.)
 
-- [ ] split up some namespaces would be nice
+- [x] split up some namespaces would be nice
 
 - [x] basic n-grams.
 
@@ -74,9 +75,9 @@ FIXME
 
 - [ ] big refactor and tidy.
 
-- [ ] Stopwords removal.
+- [x] Stopwords removal.
 
-- [ ] TF/IDF scores.
+- [x] TF/IDF scores.
 
 - [ ] Figure out how to leverage lazy data structures to handle large datasets.
 
