@@ -1,4 +1,4 @@
-(ns MeowMeow.document
+(ns tzara.document
 "namespace for document-level/wide transformations: word and char-tokenizers and 
 all-doc-character level transformations like removing punctuation.  All 
 functions here assume document is a single string, and are straightforwardly 

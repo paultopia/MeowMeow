@@ -1,4 +1,4 @@
-(ns MeowMeow.utilities
+(ns tzara.utilities
   "helper functions that show up in multiple namespaces. Not meant for public use."
   )
 

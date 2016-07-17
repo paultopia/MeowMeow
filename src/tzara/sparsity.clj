@@ -1,7 +1,7 @@
-(ns MeowMeow.sparsity
+(ns tzara.sparsity
 "sparsity: take decimal from user 
 filter columns by frequencies list/numdocs > that decimal."
-    (:require [MeowMeow.utilities :refer :all]))
+    (:require [tzara.utilities :refer :all]))
 
 
 (defn- rowfilter

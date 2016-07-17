@@ -1,20 +1,20 @@
-(ns MeowMeow.dsops
+(ns tzara.dsops
   "This is the namespace for operations on an entire dataset, represented as a 
   term document matrix.  Many implementations are delegated to other namespaces
-  such as MeowMeow.tfidf (tf-idf scoring), MeowMeow.sparsity (removal of sparse terms). 
+  such as tzara.tfidf (tf-idf scoring), tzara.sparsity (removal of sparse terms). 
   Note that the tfidf and sparsity namespaces work on values alone, represented as 
   matrix (nested vectors/sequences). They do not work on datasets represented as 
   a map of feature labels and matrix.  For that, use this namespace."
-    (:require [MeowMeow.tfidf]
-            [MeowMeow.sparsity]))
+    (:require [tzara.tfidf]
+            [tzara.sparsity]))
 
 (defn tfidf
   "Replace token frequencies with tf-idf scores.  For further documentation see 
   the function of the same name in the tfidf namespace." 
   ([dataset]
-    {:labels (:labels dataset) :frequencies (MeowMeow.tfidf/tfidf (:frequencies dataset))})
+    {:labels (:labels dataset) :frequencies (tzara.tfidf/tfidf (:frequencies dataset))})
   ([dataset flag]
-    {:labels (:labels dataset) :frequencies (MeowMeow.tfidf/tfidf (:frequencies dataset flag))}))
+    {:labels (:labels dataset) :frequencies (tzara.tfidf/tfidf (:frequencies dataset flag))}))
 
 (defn sparsity 
   "Remove tokens that appear in less than level 

@@ -1,7 +1,7 @@
 
 
 
-(ns MeowMeow.tfidf
+(ns tzara.tfidf
   "calculate tf-idf scores from tdm as defined by td-matrix in the tdm namespace
 and just return labelled matrix of tf-idf scores
 supplies a normalized version (default) and an un-normalized version. 
@@ -18,7 +18,7 @@ practical purposes, if someone wants to implement that as an alternative
 I'll happily take a PR. 
 api: for default, (tfidf YOUR-TDM), 
 otherwise, (tfidf YOUR-TDM :normalized) or (tfidf YOUR-TDM :raw)"
-  (:require [MeowMeow.utilities :refer [count-column-presences]]))
+  (:require [tzara.utilities :refer [count-column-presences]]))
 
 (defn- item-normalized
   [count-t num-tokens numdocs numdocs-t]

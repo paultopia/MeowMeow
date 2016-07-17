@@ -1,14 +1,14 @@
-(ns MeowMeow.core-test
+(ns tzara.core-test
   (:require [clojure.test :refer :all]
-            [MeowMeow.core :as cor]
-            [MeowMeow.tdm :as tdm]
-            [MeowMeow.tokens :as tok]
-            [MeowMeow.document :as doc]
-            [MeowMeow.tfidf :as tfi]
-            [MeowMeow.utilities :as uti]
-            [MeowMeow.sparsity :as spa]
-            [MeowMeow.dsops :as dso]
-            [MeowMeow.featurizer :as fea]))
+            [tzara.core :as cor]
+            [tzara.tdm :as tdm]
+            [tzara.tokens :as tok]
+            [tzara.document :as doc]
+            [tzara.tfidf :as tfi]
+            [tzara.utilities :as uti]
+            [tzara.sparsity :as spa]
+            [tzara.dsops :as dso]
+            [tzara.featurizer :as fea]))
 
 (def testtokens [["One" "Two" "Three"] ["Ay" "Bee" "Cee"] ["One" "Ay" "One" "Bee" "One" "Ay"]])
 
@@ -20,7 +20,7 @@
 (deftest tdmatrix 
   (testing "can generate td-matrix from matrix of tokens"
     (is (= {:labels ["Ay" "Bee" "Cee" "One" "Three" "Two"], :frequencies [[0 0 0 1 1 1] [1 1 1 0 0 0] [2 1 0 3 0 0]]}
-           (tdm/td-matrix (MeowMeow.tdm/td-maps testtokens))))))
+           (tdm/td-matrix (tzara.tdm/td-maps testtokens))))))
 
 
 (deftest basic-ngram

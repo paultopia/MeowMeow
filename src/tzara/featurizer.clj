@@ -1,4 +1,4 @@
-(ns MeowMeow.featurizer
+(ns tzara.featurizer
   "Core abstraction: the featurizer. Idea is that you should be able to pass 
   a vector of texts, and any function that produces a vector of features from 
   text, to a higher-order function and that higher-order function should 

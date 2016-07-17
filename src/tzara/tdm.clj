@@ -1,4 +1,4 @@
-(ns MeowMeow.tdm
+(ns tzara.tdm
   "functions to create a term-document matrix out of a collection of 
 tokenized strings (seqable of seqable) (vectors, sequences, whev.).  
 There are two public functions.  The first, td-maps, takes a straight seqable of seqable, 
@@ -10,7 +10,7 @@ frequency vector-of-seqs is in standard term-document-matrix format (i.e.,
 documents on the rows, counts on the columns) and labels are keywords
 So obviously, the thing to do ordinarily is (td-matrix (td-map your-tokenized-dataset))
 This should all just pass seamlessly to any core.matrix flavor."
- (:require [MeowMeow.featurizer :as fea]))
+ (:require [tzara.featurizer :as fea]))
 
 
 (defn td-maps

@@ -1,4 +1,4 @@
-(ns MeowMeow.tokens
+(ns tzara.tokens
 "namespace for transformations that operate on document as vector of tokens, 
 including transformations like n-gram re-tokenization that assume prior 
 tokenization.  (inefficient I suppose), also including stemmers, stopword 
