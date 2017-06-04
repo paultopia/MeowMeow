@@ -93,7 +93,7 @@ FIXME
 
 - [ ] Implement or wrap LDA
 
-- [ ] Wrap important bits of a java text mining library (?) http://opennlp.apache.org ? https://stanfordnlp.github.io/CoreNLP/ ? Looks like the stanford one has existing partial wrappers. Ditto apache https://github.com/dakrone/clojure-opennlp
+- [ ] Wrap important bits of a java text mining library (?) http://opennlp.apache.org ? https://stanfordnlp.github.io/CoreNLP/ ? Looks like the stanford one has existing partial wrappers. https://github.com/damienstanton/stanford-corenlp https://github.com/ngrunwald/stanford-nlp-tools Ditto apache https://github.com/dakrone/clojure-opennlp
 
 (notes to self: namespace organization by data level? tokenizers (including word split/1-gram and character-n-gram; make a sentence one?) as well as universal character transforms like tolower and remove punctuation operate on individual texts as single string; stemmers and word n-grams work on document as vector of tokens (and stemmers should be applied first); tf-idf (right?), sparse terms removal, tdm creation, etc., work on dataset as whole.  should also supply convenience functions to operate on dataset as a whole after applying lower-level transforms.)
 
