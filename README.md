@@ -91,6 +91,10 @@ FIXME
 
 - [ ] Create Python and R interfaces (possibly as separate CLI application or via http).
 
+- [ ] Implement or wrap LDA
+
+- [ ] Wrap important bits of a java text mining library (?) http://opennlp.apache.org ? https://stanfordnlp.github.io/CoreNLP/ ? Looks like the stanford one has existing partial wrappers. Ditto apache https://github.com/dakrone/clojure-opennlp
+
 (notes to self: namespace organization by data level? tokenizers (including word split/1-gram and character-n-gram; make a sentence one?) as well as universal character transforms like tolower and remove punctuation operate on individual texts as single string; stemmers and word n-grams work on document as vector of tokens (and stemmers should be applied first); tf-idf (right?), sparse terms removal, tdm creation, etc., work on dataset as whole.  should also supply convenience functions to operate on dataset as a whole after applying lower-level transforms.)
 
 (possible edge case note to self: where there's a chunk of punctuation surrounded by spaces, stripping punctuation will leave extra spaces, which will show up as blank strings after splitting.  After splitting, should run through something like `(remove clojure.string/blank?)` per discussion on http://www.markhneedham.com/blog/2013/09/22/clojure-stripping-all-the-whitespace/)
