@@ -53,7 +53,7 @@ With that plan, really all I need to do before first release is:
 
 - [ ] wrap more stemmers
 
-- [ ] make sure the tests that I haven't looked at for months still pass.
+- [x] make sure the tests that I haven't looked at for months still pass.
 
 - [ ] reorganize the code to make it easy to contribute and to have namespace hierarchies follow the cleaners/tokenizers/matrixers structure
 
