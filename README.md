@@ -61,7 +61,7 @@ With that plan, really all I need to do before first release is:
 
 - [ ] write a commandline entry point
 
-- [ ] integrate a quick http server (maybe with liberator?  Aleph looks like it can just handle simple as well... https://github.com/ztellman/aleph)
+- [ ] integrate a quick http server (maybe with liberator?  Or just ring + jetty? It's not like I need routing. Just to be able to take a put request... https://github.com/ring-clojure/ring/wiki/Getting-Started Aleph looks like it can just handle simple as well... https://github.com/ztellman/aleph)
 
 - [ ] optimize a little (transducers, reducers, parallelism where possible)
 
