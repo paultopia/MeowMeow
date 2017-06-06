@@ -1,4 +1,4 @@
-# Concordance
+# Concordance (OBSOLETE)
 
 New concept: the concordance. 
 
