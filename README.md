@@ -47,7 +47,7 @@ Read docs as CSV or JSON. (Header row required for former.). Also pass in a conf
 
 -- Tokenizers: word, word ngram (with n config), character ngram (with n config), sentence (only if punctuation is preserved, only if English), regex. At least one mandatory, additional ones will be added as extra columns. Order doesn't matter, each tokenizer starts with fresh copy of cleaned set. If none given, defaults to just word.
 
--- Matrixers: count or tfidf (others??).  One required, defaults to count if none given)
+-- Matrixers: count, tfidf (with several normalixation options), or binary-presence.  One required, defaults to count if none given)
 
 Then this can be a library. Run from commandline taking JSON for config map.  Or Cli can also create a http server to take JSON config map and data programmatically from external workflow. Basically like one of those python libraries that can be a commandline app too. 
 

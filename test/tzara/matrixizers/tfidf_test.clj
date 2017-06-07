@@ -13,14 +13,6 @@
       [12 15 18]
       (tfidf/colsums [[1 2 3] [4 5 6] [7 8 9]])))))
 
-(deftest binary-token-presence
-  (testing "binary token presence is correct"
-    (is
-     (=
-      [[0 0 0 1 1 1 1 0 1 1 1 1 1 1] [1 1 1 0 0 0 0 1 0 0 0 1 0 0]]
-      (tfidf/binary-token-presence [[0 0 0 1 1 1 1 0 1 1 5 2 1 1] [1 1 1 0 0 0 0 1 0 0 0 2 0 0]])))))
-
-
 (deftest total-normalized-term-frequencies
   (testing "total normalized term frequencies (the tf in tf-idf) is correct"
     (is
