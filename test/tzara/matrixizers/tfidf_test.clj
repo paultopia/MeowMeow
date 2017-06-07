@@ -20,13 +20,21 @@
       [[0 0 0 1 1 1 1 0 1 1 1 1 1 1] [1 1 1 0 0 0 0 1 0 0 0 1 0 0]]
       (tfidf/binary-token-presence [[0 0 0 1 1 1 1 0 1 1 5 2 1 1] [1 1 1 0 0 0 0 1 0 0 0 2 0 0]])))))
 
-(deftest term-frequencies
-  (testing "term frequencies (the tf in tf-idf) is correct"
+
+(deftest total-normalized-term-frequencies
+  (testing "total normalized term frequencies (the tf in tf-idf) is correct"
     (is
      (=
-      ;; [0.375 0.625] currently returns fractions, but that might be ok...
       [3/8 5/8]
-      (tfidf/term-frequencies [3 5])))))
+      (tfidf/total-normalized-term-frequencies [3 5])))))
+
+(deftest unique-normalized-term-frequencies
+  (testing "unique normalized term frequencies (the tf in tf-idf) is correct"
+    (is
+     (=
+      [0 0 1/4 1/2 3/4 1]
+      (tfidf/unique-normalized-term-frequencies [0 0 1 2 3 4])))))
+
 
 (deftest inverse-doc-frequencies
   (testing "inverse document frequencies (the idf in tf-idf) is correct"
