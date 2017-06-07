@@ -1,5 +1,5 @@
 (ns tzara.matrixizers.utilities-test
-  (:require [tzara.matrixizers.utilities :as ut]
+  (:require [tzara.matrixizers.utilities :as utils]
             [clojure.test :refer :all]))
 
 (def testvec ["cat" "dog" "woof" "meow" "fish" "glub" "glub" "glib" "glub" "glob" "glub" "meow" "tweet" "bird" "glub"])
@@ -11,25 +11,25 @@
     (is
      (=
       #{"bird" "cat" "dog" "fish" "glib" "glob" "glub" "meow" "tweet" "woof"}
-      (ut/uniques testvec)))))
+      (utils/uniques testvec)))))
 
 (deftest uniques-map
   (testing "can get unique items from frequency map"
     (is
      (=
       #{"bird" "cat" "dog" "fish" "glib" "glob" "glub" "meow" "tweet" "woof"}
-      (ut/uniques (frequencies testvec))))))
+      (utils/uniques (frequencies testvec))))))
 
 (deftest uniques-lazyseq
   (testing "can get unique items from lazy sequence"
     (is
      (=
       #{"bird" "cat" "dog" "fish" "glib" "glob" "glub" "meow" "tweet" "woof"}
-      (ut/uniques (map identity testvec))))))
+      (utils/uniques (map identity testvec))))))
 
 (deftest alltokens
   (testing "can get tokens from nested vectors"
     (is
      (=
       ["bar" "bat" "baz" "bird" "cat" "dog" "fish" "foo" "glib" "glob" "glub" "meow" "tweet" "woof"]
-      (ut/make-token-list testnest)))))
+      (utils/make-token-list testnest)))))

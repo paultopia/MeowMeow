@@ -1,6 +1,6 @@
 (ns tzara.utilities
   "helper functions that show up in multiple namespaces. Not meant for public use."
-  )
+  (:require [clojure.data.csv :refer [write-csv]]))
 
 (defn- numdocs-t-helper
   "given a column represented as a bunch of individual entries in that column, 
@@ -24,5 +24,7 @@
     (let [pairs (map vector target test)]
       (mapv first (filter #(pred (second %)) pairs))))
 
-
+;; nested vectors to csv string
+(defn csv-string [v]
+    (with-out-str (write-csv *out* v)))
 
