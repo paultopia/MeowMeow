@@ -14,7 +14,9 @@ In order to get non-normalized version, pass :raw into the function, i.e.,
   Only the default normalization is tested, however, the difference is just swapping out the divisor in the tf-idf function, so should be ok.
   "
   (:require [tzara.matrixizers.tdm :as tdm]
-            [tzara.matrixizers.binary :refer [binary-token-presence]]))
+            [tzara.matrixizers.binary :refer [binary-token-presence]]
+            [tzara.matrixizers.utilities :refer [concatenate-header-and-data]]))
+
 
 (defn colsums
   "sum columns of multidimensional seq"
@@ -62,4 +64,4 @@ In order to get non-normalized version, pass :raw into the function, i.e.,
          tfs (normalization option data)
          idfs (inverse-doc-frequencies numdocs appearances)
          tfidf-scores (mapv (partial multiply-out-tfidf idfs) tfs)]; idf for each term
-     (reduce conj [header] tfidf-scores)))) ;; same perf crime again, 
+     (concatenate-header-and-data header tfidf-scores)))) 

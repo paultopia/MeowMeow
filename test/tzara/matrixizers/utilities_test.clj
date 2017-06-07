@@ -33,3 +33,10 @@
      (=
       ["bar" "bat" "baz" "bird" "cat" "dog" "fish" "foo" "glib" "glob" "glub" "meow" "tweet" "woof"]
       (utils/make-token-list testnest)))))
+
+
+(deftest concatenate-header-and-data
+  (testing "concatenation of header vec and data vec work as expected"
+    (is
+     (= [[:a :b :c] [1 2 3] [4 5 6]]
+      (utils/concatenate-header-and-data [:a :b :c] [[1 2 3] [4 5 6]])))))
