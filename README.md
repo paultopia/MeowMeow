@@ -25,6 +25,8 @@
 
 # Tzara
 
+[![Build Status](https://travis-ci.org/paultopia/tzara.svg?branch=master)](https://travis-ci.org/paultopia/tzara)
+
 A Clojure library with some utility functions for text-mining. Designed for:
 
 - Quick and easy drop-in use in Clojure data science workflows; and

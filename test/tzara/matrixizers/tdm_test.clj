@@ -20,6 +20,8 @@
   (testing "tdm is correct"
     (is
      (=
-      "bar,bat,baz,bird,cat,dog,fish,foo,glib,glob,glub,meow,tweet,woof\n0,0,0,1,1,1,1,0,1,1,5,2,1,1\n1,1,1,0,0,0,0,1,0,0,0,2,0,0\n"
+      [["bar" "bat" "baz" "bird" "cat" "dog" "fish" "foo" "glib" "glob" "glub" "meow" "tweet" "woof"]
+       [0 0 0 1 1 1 1 0 1 1 5 2 1 1]
+       [1 1 1 0 0 0 0 1 0 0 0 2 0 0]]
       (tdm/make-tdm testnest)))))
 
