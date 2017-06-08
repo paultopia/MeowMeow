@@ -39,15 +39,54 @@ New vision for Tzara: just the transformations (most of which are already implem
 
 Read docs as CSV or JSON. (Header row required for former.). Also pass in a configuration map that specifies:
 
-1.  The field that has the docs (rest assumed to be extra columns in resulting data) 
+1.  The field that has the docs (rest assumed to be extra columns in resulting data, e.g., labels, other features) 
 
 2. Declarative transformations, as follows:
 
--- Cleaners: punctuation, numbers, case, stemmer, stopword removal, sparse term removal (with a proportion config).  All optional, can have 0 or as many as needed. Order counts, since what counts as sparse or stopword or whev is going to vary before or after stemming, removing punctuation, etc.
+-- Cleaners: punctuation, numbers, case, stopword removal. All optional, can have 0 or as many as needed. 
 
--- Tokenizers: word, word ngram (with n config), character ngram (with n config), sentence (only if punctuation is preserved, only if English), regex. At least one mandatory, additional ones will be added as extra columns. Order doesn't matter, each tokenizer starts with fresh copy of cleaned set. If none given, defaults to just word.
+-- Tokenizers: word, word ngram (with n config), character ngram (with n config), regex. At least one mandatory, additional ones will be added as extra columns. Order doesn't matter, each tokenizer starts with fresh copy of cleaned set. If none given, defaults to just word.
+
+-- Postprocessors: stemming, sparse token removal (with a proportion config). All optional, can have 0 or as many as needed.
 
 -- Matrixers: count, tfidf (with several normalixation options), or binary-presence.  One required, defaults to count if none given)
+
+**Cleaners** work on a sequence of strings (e.g. vector of documents) and return a sequence of modified strings. Available cleaners include: 
+
+- Remove punctuation.
+
+- Lowercase all characters.
+
+- Remove numbers.
+
+- Remove stopwords (english language only, taken from NLTK list).  (TO ADD: remove user-specified stopwords. Or is this already in there?)
+
+**Tokenizers** work on a sequence of strings and return a sequence of sequences of strings (tokens). Available tokenizers include:
+
+- Individual words (classic bag of words representation).
+
+- Word n-gram for arbitrary n.
+
+- Character n-gram for arbitrary n.
+
+- Regular expression (finds matches, calls them tokens).
+
+**Postprocessors** work on a sequence of sequences of strings (tokens) and return a sequence of sequences of strings. Available postprocessors include: 
+
+- Stemmers (snowball (to be added: porter, others).
+
+- Sparse token removal (with configurable proportion of sparsity).
+
+**Matrixers** work on a sequence of sequences of strings and return a matrix where columns represent tokens, rows represent documents, and entries represent scores. Available matrixers include: 
+
+- TF-IDF scores (with TF scores raw, normalized by document length, or normalized by number of unique tokens in document).
+
+- Token counts.
+
+- Binary presence or absence of token.
+
+**I/O** handles conversion from json or csv, extraction of text portions and conversion into sequence of strings, and then recombination of text portions as TDM with remaining column and production either as vector of vectors or as CSV
+
 
 Then this can be a library. Run from commandline taking JSON for config map.  Or Cli can also create a http server to take JSON config map and data programmatically from external workflow. Basically like one of those python libraries that can be a commandline app too. 
 
